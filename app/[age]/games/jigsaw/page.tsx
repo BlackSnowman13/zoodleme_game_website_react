@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { imageCollection, Category } from "../../../public/types/categories"
+import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
 
 export default function Home() {
   return (
@@ -13,7 +13,11 @@ export default function Home() {
   );
 }
 
-function Categories({ data }) {
+function Categories({
+  data
+} : {
+  data: ImageCollection
+}) {
   const categoryList = data.categories.map((category: Category) => 
     <CategoryItem key={category.categoryName} name={category.categoryName} imageUrl={category.assets[0].url} />
   )
@@ -30,7 +34,11 @@ function Categories({ data }) {
   </div>
 }
 
-function CategoryItem({ name, imageUrl }) {
+function CategoryItem({
+  name, imageUrl
+} : {
+  name: string, imageUrl: string
+}) {
   return (
     <div className="flex flex-col w-fit text-center p-2">
       <Image
