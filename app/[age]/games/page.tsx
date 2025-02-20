@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { gameCollection, GameCollection, Game } from "@/public/types/games";
+import Link from "next/link";
 
 export default async function Games({
   params
@@ -26,7 +27,7 @@ function GameList({
   data: GameCollection, age: number
 }) {
   const gameList = data.games.filter(game => game.age == age).map((game: Game) =>
-    <GameItem key={game.name} name={game.name} iconUrl={game.icon} description={game.description} />
+    <GameItem key={game.name} name={game.name} iconUrl={game.icon} description={game.description} url={game.path} />
   )
   return(
     <div className="flex flex-col items-center">
@@ -36,12 +37,12 @@ function GameList({
 }
 
 function GameItem({
-  name, iconUrl, description
+  name, iconUrl, description, url
 } : {
-  name: string, iconUrl: string, description: string
+  name: string, iconUrl: string, description: string, url: string
 }) {
   return(
-    <div className="flex flex-row items-center bg-[#FFC6AA] w-[95%] mt-2 mb-2 p-2 rounded-[15px]">
+    <Link className="flex flex-row items-center bg-[#FFC6AA] w-[95%] mt-2 mb-2 p-2 rounded-[15px]" href={url}>
       <div className="flex flex-col justify-center items-center aspect-square">
         <Image
           src={iconUrl}
@@ -58,7 +59,7 @@ function GameItem({
           {description}
         </div>
       </div>
-    </div>
+    </Link>
   )
 }
 
