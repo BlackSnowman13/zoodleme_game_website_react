@@ -13,7 +13,7 @@ export default async function Games({
   return (
     <>
       <div className="flex justify-center pt-5 pb-5">
-        <div className="w-fit text-xl text-white bg-[#FD9764] p-5 pl-10 pr-10 rounded-[15px]">Choose a game</div>
+        <div className=" text-white bg-[#FD9764] p-2 w-[80%] text-center rounded-[15px] text-[30px]">Choose a game</div>
       </div>
 
       <GameList data={gameCollection} age={age} />
@@ -42,7 +42,7 @@ function GameItem({
   name: string, iconUrl: string, description: string, url: string
 }) {
   return(
-    <Link className="flex flex-row items-center bg-[#FFC6AA] w-[95%] mt-2 mb-2 p-2 rounded-[15px]" href={url}>
+    <Link className="flex flex-row items-center bg-[#FFC6AA] w-[95%] mt-2 mb-2 p-2 rounded-[15px] drop-shadow-md" href={url}>
       <div className="flex flex-col justify-center items-center aspect-square">
         <Image
           src={iconUrl}
