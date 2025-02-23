@@ -2,20 +2,22 @@
 
 import Image from "next/image";
 import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { JigsawGamePage } from "./jigsawGamePage";
+import Script from "next/script";
 
 export default function Jigsaw() {
   const [state, setState] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('')
   const [pieceNumber, setPieceNumber] = useState(16);
+  const [image, setImage] = useState('');
 
-  return state == 0 ? <CategoriesPage />: <JigsawGamePage category={selectedCategory} setCategory={setSelectedCategory} state={state} setState={setState} pieceNumber={pieceNumber} />;
+  return state == 0 ? <CategoriesPage />: <JigsawGamePage category={selectedCategory} setCategory={setSelectedCategory} state={state} setState={setState} image={image} setImage={setImage} pieceNumber={pieceNumber} />;
 
   function CategoriesPage() {
     
-    function onPieceSelection(event: MouseEvent<HTMLDivElement, MouseEvent>): void {
-      const { id } : { id: string} = event.target;
+    function onPieceSelection(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+      const { id } = event.target;
       setPieceNumber(parseInt(id.replace('piece_', '')))
     }
 
@@ -42,11 +44,11 @@ export default function Jigsaw() {
                   Choose difficulty
                 </div>
 
-                <div className="flex justify-center items-center w-fit">
+                <div className="flex justify-center items-center w-[100%]">
                   <Image
                   className="w-[80%] rounded-[5px] border-[5px] border-[#fadac6]"
-                    src={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].url}
-                    alt={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].name}
+                    src={image}
+                    alt="image"
                     width={1000}
                     height={1000}
                   />
@@ -79,12 +81,36 @@ export default function Jigsaw() {
       const categoryList = data.categories.map((category: Category) => 
         <CategoryItem key={category.categoryName} name={category.categoryName} imageUrl={category.assets[0].url} />
       )
+      function triggerImageUpload(): void {
+        document.getElementById('imageUpload')!.click()
+      }
+
+      useEffect(() => {
+        document.getElementById('imageUpload')?.addEventListener('change', (event) => {
+          const file = event.target!.files[0];
+          if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+              setImage(e.target.result)
+              console.log(e.target.result)
+              setSelectedCategory(e.target.result)
+            };
+            reader.readAsDataURL(file);
+          }
+        })
+      })
+
       return(
         <div className="flex flex-row flex-wrap justify-evenly p-2 ">
           {categoryList}
     
-          <div className="flex flex-col w-fit text-center pt-2 pb-2">
-            <div className="w-[170px] h-[170px] border-[#f8d0b8] rounded-[15px] border-[5px]"></div>
+          <div 
+            onClick={triggerImageUpload}
+            className="flex flex-col w-fit text-center pt-2 pb-2"
+            >
+            <div className="w-[170px] h-[170px] border-[#f8d0b8] rounded-[15px] border-[5px]">
+              <input className="hidden" type="file" accept="image/*" id="imageUpload" />
+            </div>
             <div>Add your own image</div>
             <div className="flex absolute w-[170px] h-[170px] border-[#f8d0b8] rounded-[15px] border-[5px] bg-[#ffede2b9] justify-center items-center">
               <span className="material-symbols-rounded text-[50px]">add_photo_alternate</span>
@@ -99,8 +125,12 @@ export default function Jigsaw() {
     } : {
       name: string, imageUrl: string
     }) {
+
       return (
-        <div onClick={() => setSelectedCategory(name)} className="flex flex-col w-fit text-center pt-2 pb-2">
+        <div onClick={() => {
+          setImage(imageUrl)
+          setSelectedCategory(name)
+        }} className="flex flex-col w-fit text-center pt-2 pb-2">
           <Image
             src={imageUrl}
             alt={name}
