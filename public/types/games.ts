@@ -21,7 +21,7 @@ export const gameCollection: GameCollection = {
         },
         {
             name: "Memory",
-            path: "/jigsaw",
+            path: "/3-5/games/memory",
             icon: "/assets/animals/cat.jpg",
             description: "Match pairs of cards by remembering their positions.",
             age: 3
