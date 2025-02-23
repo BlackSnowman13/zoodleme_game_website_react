@@ -1,8 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded');
+@import "tailwindcss";
 
-@tailwind base;
+/* @tailwind base;
 @tailwind components;
-@tailwind utilities;
+@tailwind utilities; */
 
 :root {
   --background: #FDEFE7;
@@ -27,9 +28,14 @@
 html, body {
   height: 100%;
   width: 100%;
+  margin: 0;
 }
 
 body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+/* .material-symbols-rounded {
+  font-size: inherit !important;
+} */

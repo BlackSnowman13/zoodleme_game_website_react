@@ -47,9 +47,9 @@ function GameView() {
   return(
     <div className="w-full h-full">
       <div className="flex flex-row justify-around bg-[#FFC6AA] p-4">
-        <span className="material-symbols-rounded text-[50px]">arrow_back</span>
+        <span className="material-symbols-rounded" style={{ fontSize: '50px'}}>arrow_back</span>
         <div className="text-[30px] text-white bg-[#E79A74] w-[40%] text-center rounded-[10px]">5:00</div>
-        <span className="material-symbols-rounded text-[50px]">cached</span>
+        <span className="material-symbols-rounded" style={{ fontSize: '50px'}}>cached</span>
       </div>
 
       <div>
