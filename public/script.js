@@ -8,7 +8,8 @@ async function fetchAssetsJson() {
 let showEdgePiece = false;
 let disableEvents = true
 
-let jigsawImage = "/assets/jigsaw/animals/cat.jpg"
+let jigsawImage = localStorage.getItem('image')
+// let jigsawImage = "/assets/jigsaw/animals/cat.jpg"
 
 var seconds = 0;
 var initSeconds = 3;
