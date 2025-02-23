@@ -1,21 +1,19 @@
-"use client"
-
 import Image from "next/image";
 import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
-import { useState } from "react";
-import { JigsawGamePage } from "./jigsawGamePage";
+import { useEffect, useState } from "react";
+import { JigsawGameView } from "./jigsawGamePage";
 
 export default function Jigsaw() {
   const [state, setState] = useState(0);
   const [selectedCategory, setSelectedCategory] = useState('')
   const [pieceNumber, setPieceNumber] = useState(16);
 
-  return state == 0 ? <CategoriesPage />: <JigsawGamePage category={selectedCategory} setCategory={setSelectedCategory} state={state} setState={setState} pieceNumber={pieceNumber} />;
+  return state == 0 ? <CategoriesView />: <JigsawGameView category={selectedCategory} setCategory={setSelectedCategory} state={state} setState={setState} pieceNumber={pieceNumber} />;
 
-  function CategoriesPage() {
-    
-    function onPieceSelection(event: MouseEvent<HTMLDivElement, MouseEvent>): void {
-      const { id } : { id: string} = event.target;
+  function CategoriesView() {
+
+    function onPieceSelection(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+      const { id } = event.target;
       setPieceNumber(parseInt(id.replace('piece_', '')))
     }
 
@@ -41,12 +39,12 @@ export default function Jigsaw() {
                 <div className="bg-[#FFC6AA] w-fit flex text-center pl-7 pr-7 rounded-[20px] text-[22px] drop-shadow-xl">
                   Choose difficulty
                 </div>
-
+                
                 <div className="flex justify-center items-center w-fit">
                   <Image
                   className="w-[80%] rounded-[5px] border-[5px] border-[#fadac6]"
-                    src={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].url}
-                    alt={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].name}
+                    src={`${imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].url}`}
+                    alt={`${imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].name}`}
                     width={1000}
                     height={1000}
                   />
