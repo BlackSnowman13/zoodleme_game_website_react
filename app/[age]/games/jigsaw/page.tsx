@@ -1,9 +1,9 @@
 "use client"
-
 import Image from "next/image";
-import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
+
 import { useState } from "react";
 import { JigsawGamePage } from "./jigsawGamePage";
+import { Category, ImageCollection, imageCollection } from "@/public/types";
 
 export default function Jigsaw() {
   const [state, setState] = useState(0);
@@ -14,8 +14,8 @@ export default function Jigsaw() {
 
   function CategoriesPage() {
     
-    function onPieceSelection(event: MouseEvent<HTMLDivElement, MouseEvent>): void {
-      const { id } : { id: string} = event.target;
+    function onPieceSelection(event: React.MouseEvent<HTMLDivElement, MouseEvent>): void {
+      const { id } = event.target;
       setPieceNumber(parseInt(id.replace('piece_', '')))
     }
 
@@ -45,8 +45,8 @@ export default function Jigsaw() {
                 <div className="flex justify-center items-center w-fit">
                   <Image
                   className="w-[80%] rounded-[5px] border-[5px] border-[#fadac6]"
-                    src={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].url}
-                    alt={imageCollection.categories.find(category => category.categoryName == selectedCategory)?.assets[0].name}
+                    src={imageCollection.categories.find(category => category.categoryName == selectedCategory)!.assets[0].url}
+                    alt={imageCollection.categories.find(category => category.categoryName == selectedCategory)!.assets[0].name}
                     width={1000}
                     height={1000}
                   />

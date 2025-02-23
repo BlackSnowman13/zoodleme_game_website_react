@@ -1,5 +1,5 @@
 import Image from "next/image";
-import { gameCollection, GameCollection, Game } from "@/public/types/games";
+import { gameCollection, GameCollection, Game } from "@/public/types";
 import Link from "next/link";
 
 export default async function Games({
