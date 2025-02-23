@@ -1,4 +1,5 @@
 'use client'
+
 import { Levels, memoryLevels } from "@/public/types/memoryLevelsData";
 import { Dispatch, SetStateAction, useState } from "react"
 
@@ -44,8 +45,28 @@ function LevelsView({
 
 function GameView() {
   return(
-    <div>
-      Memory Game View
+    <div className="w-full h-full">
+      <div className="flex flex-row justify-around bg-[#FFC6AA] p-4">
+        <span className="material-symbols-rounded text-[50px]">arrow_back</span>
+        <div className="text-[30px] text-white bg-[#E79A74] w-[40%] text-center rounded-[10px]">5:00</div>
+        <span className="material-symbols-rounded text-[50px]">cached</span>
+      </div>
+
+      <div>
+        <Card />
+      </div>
     </div>
   )
+
+  function Card() {
+    const [isFlipped, setIsFlipped] = useState(false);
+
+    return (
+      <div className="perspective-[1000px] cursor-pointer">
+        <div className="w-full h-full relative transform-3d">
+
+        </div>
+      </div>
+    )
+  }
 }
