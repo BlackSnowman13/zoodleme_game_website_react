@@ -1,14 +1,14 @@
 import Script from "next/script";
 import Image from "next/image";
-import { useEffect, useRef, useState } from "react"
+import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react"
 
 export function JigsawGameView({
     category, setCategory, state, setState, pieceNumber
 } : {
-    category: string, state: number, pieceNumber: number
+    category: string, setCategory: Dispatch<SetStateAction<string>>, state: number, setState: Dispatch<SetStateAction<number>>, pieceNumber: number
 }) {
-	const canvasRef = useRef(null);
-	const [imageLoaded, setImageLoaded] = useState(false);
+  const canvasRef = useRef(null);
+  const [imageLoaded, setImageLoaded] = useState(false);
   const [completed, setCompleted] = useState(false);
   const [seconds, setSeconds] = useState(0);
   const [initSeconds, setInitSeconds] = useState(3);

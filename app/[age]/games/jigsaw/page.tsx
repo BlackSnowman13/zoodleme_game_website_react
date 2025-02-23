@@ -1,6 +1,6 @@
 import Image from "next/image";
 import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { JigsawGameView } from "./jigsawGamePage";
 
 export default function Jigsaw() {
