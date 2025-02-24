@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import { Category, imageCollection, ImageCollection } from "@/public/types/categories";
 import { useState } from "react";
