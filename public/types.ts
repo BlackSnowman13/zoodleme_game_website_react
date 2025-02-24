@@ -137,30 +137,30 @@ export const memoryLevels: MemoryLevelsCollection = {
         {
             level: '1',
             difficulty: 'easy',
-            rows: 3,
+            rows: 2,
             columns: 2,
-            totalElements: 6
+            totalElements: 4
         },
         {
             level: '2',
             difficulty: 'easy',
+            rows: 2,
+            columns: 2,
+            totalElements: 4
+        },
+        {
+            level: '3',
+            difficulty: 'mid',
             rows: 3,
             columns: 2,
             totalElements: 6
         },
         {
-            level: '3',
-            difficulty: 'mid',
-            rows: 4,
-            columns: 3,
-            totalElements: 12
-        },
-        {
             level: '4',
             difficulty: 'mid',
-            rows: 4,
-            columns: 3,
-            totalElements: 12
+            rows: 3,
+            columns: 2,
+            totalElements: 6
         },
         {
             level: '5',
@@ -179,16 +179,16 @@ export const memoryLevels: MemoryLevelsCollection = {
         {
             level: '7',
             difficulty: 'hard',
-            rows: 5,
-            columns: 4,
-            totalElements: 20
+            rows: 4,
+            columns: 3,
+            totalElements: 12
         },
         {
             level: '8',
             difficulty: 'hard',
-            rows: 5,
-            columns: 4,
-            totalElements: 20
+            rows: 4,
+            columns: 3,
+            totalElements: 12
         },
         {
             level: '9',

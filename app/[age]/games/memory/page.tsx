@@ -7,7 +7,7 @@ import { Dispatch, SetStateAction, useState } from "react"
 export default function MemoryGame() {
   const [level, setLevel] = useState(0)
 
-  return level == 0 ? <LevelsView setLevel={setLevel} /> : <GameView gameLevel={level} />
+  return level == 0 ? <LevelsView setLevel={setLevel} /> : <GameView gameLevel={level} setGameLevel={setLevel} />
 }
 
 function LevelsView({
@@ -45,15 +45,15 @@ function LevelsView({
 }
 
 function GameView({
-  gameLevel
+  gameLevel, setGameLevel
 } : {
-  gameLevel: number
+  gameLevel: number, setGameLevel: Dispatch<SetStateAction<number>>
 }) {
   const currentLevelData =  memoryLevels.levels.find((level) => level.level == gameLevel.toString())
   return(
     <div className="flex flex-col w-full h-full">
       <div className="flex flex-row justify-around bg-[#FFC6AA] p-4">
-        <span className="material-symbols-rounded" style={{ fontSize: '50px'}}>arrow_back</span>
+        <span onClick={() => setGameLevel(0)} className="material-symbols-rounded" style={{ fontSize: '50px'}}>arrow_back</span>
         <div className="text-[30px] text-white bg-[#E79A74] w-[40%] text-center rounded-[10px]">5:00</div>
         <span className="material-symbols-rounded" style={{ fontSize: '50px'}}>cached</span>
       </div>
@@ -64,8 +64,12 @@ function GameView({
     </div>
   )
 
+  // grid-cols-${generateAutoString(currentLevelData!.columns)}
+
   function generateAutoString(n: number): string {
-    return `[${Array(n).fill("auto").join("_")}]`;
+    const str = `[${Array(n).fill("auto").join("_")}]`
+    console.log(str)
+    return str;
   }
 
   function Card() {
@@ -73,11 +77,9 @@ function GameView({
 
     return (
       <div onClick={() => setIsFlipped(!isFlipped)} className="perspective-[1000px] cursor-pointer w-auto h-full">
-        <div className={`flex h-full relative transform-3d transition-transform duration-[600ms] justify-center ${isFlipped ? "rotate-y-180" : ""}`}>
-          <Image className="w-auto h-full absolute backface-hidden flex items-center justify-center rounded-2xl" style={{imageRendering: 'pixelated'}} quality={100} src={"/assets/memory/apple.png"} alt="apple.png" width={1000} height={0} />
+        <div className={`flex w-auto h-full relative transform-3d transition-transform duration-[600ms] justify-center ${isFlipped ? "rotate-y-180" : ""}`}>
+          <Image className="w-fit h-full absolute backface-hidden flex items-center justify-center rounded-2xl" style={{imageRendering: 'pixelated'}} quality={100} src={"/assets/memory/apple.png"} alt="apple.png" width={1000} height={0} />
           <Image className="w-auto h-full absolute backface-hidden flex items-center justify-center rotate-y-180 rounded-2xl" style={{imageRendering: 'pixelated'}} quality={100} src={"/assets/memory/card_back.png"} alt="back.png" width={1000} height={0} />
-          {/* <div className="w-full h-full absolute backface-hidden flex items-center justify-center">Front</div>
-          <div className="w-full h-full absolute backface-hidden flex items-center justify-center rotate-y-180">Back</div> */}
         </div>
       </div>
     )
